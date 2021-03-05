@@ -1,14 +1,70 @@
 let myLibrary = [];
-
-function Book() {
-  constructor (title, author, pages, read)
+let form = document.getElementById("form");
+let container = document.getElementById("container");
+localStorage
+class Book {
+  constructor (title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  read = boolean;
-  }
-
-
-function addBookToLibrary() {
-  // do stuff here
+  this.read = read;
+  this.newDiv;
 }
+div() {
+  let book = document.createElement("div");
+  let button = document.createElement("button");
+  let isRead = document.createElement("input");
+  let br = document.createElement("br");
+  isRead.type = "checkbox";
+  let bookInfo = `
+  Title: ${this.title}</br>
+  Author: ${this.author}</br>
+  Pages: ${this.pages}</br>
+  Read: 
+  `;
+  isRead.checked = this.read;
+  book.innerHTML = bookInfo;
+  book.appendChild(isRead);
+  book.appendChild(br);
+  book.appendChild(button);
+  button.innerHTML = "Remove";
+  button.onclick = () => this.dispose(this.title);
+  this.newDiv = book;
+  return this.newDiv;
+  
+} 
+dispose(title) {
+  this.newDiv.remove();
+  myLibrary = myLibrary.filter(book => book.title != title);
+  
+}
+
+}
+
+
+function removeInput() {
+  form.title.value = "";
+  form.author.value = "";
+  form.pages.value = "";
+  form.read.checked = false;
+}
+
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+}
+
+
+function displayList() {
+  for (books of myLibrary) {
+    container.appendChild(books.div());
+  }
+}
+
+form.addEventListener ('submit', () => {
+  let book = new Book(form.title.value, form.author.value, form.pages.value, form.read.checked);
+  removeInput()
+  addBookToLibrary(book);
+  container.innerHTML = "";
+  displayList();
+}
+)
