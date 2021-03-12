@@ -24,6 +24,8 @@ div() {
   `;
   isRead.checked = this.read;
   book.innerHTML = bookInfo;
+  book.classList.add("newDiv");
+  button.classList.add("remove-btn")
   book.appendChild(isRead);
   book.appendChild(br);
   book.appendChild(button);
@@ -36,7 +38,6 @@ div() {
 dispose(title) {
   this.newDiv.remove();
   myLibrary = myLibrary.filter(book => book.title != title);
-  
 }
 
 }
