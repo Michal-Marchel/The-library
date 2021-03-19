@@ -33,15 +33,13 @@ div() {
   button.onclick = () => this.dispose(this.title);
   this.newDiv = book;
   return this.newDiv;
-  
 } 
+
 dispose(title) {
   this.newDiv.remove();
   myLibrary = myLibrary.filter(book => book.title != title);
 }
-
 }
-
 
 function removeInput() {
   form.title.value = "";
@@ -54,7 +52,6 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-
 function displayList() {
   for (books of myLibrary) {
     container.appendChild(books.div());
@@ -62,10 +59,14 @@ function displayList() {
 }
 
 form.addEventListener ('submit', () => {
-  let book = new Book(form.title.value, form.author.value, form.pages.value, form.read.checked);
-  removeInput()
-  addBookToLibrary(book);
-  container.innerHTML = "";
-  displayList();
+  if (form.title.value.length < 1 || form.author.value.length < 1 || form.pages.value.length < 1 || isNaN(parseInt(form.pages.value))){
+    alert('You have to fill the form');
+  }else {
+    let book = new Book(form.title.value, form.author.value, form.pages.value, form.read.checked);
+    removeInput()
+    addBookToLibrary(book);
+    container.innerHTML = "";
+    displayList();
+  }
 }
 )
